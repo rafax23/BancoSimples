@@ -52,7 +52,7 @@ public class ContaBanco {
         //this.numConta = oConta; //usando atributos em vez de assessor
         //this.tipo = oTipo;
         //this.dono = oDono;
-        if(oTipo == "cc"){ 
+        if(oTipo == "cc"){ //CORRENTE 
         //IMPORTANTE: tem que comparar o parametro recebido no método
         //no caso: [["oTipo"]]
         //se comparar o "this.tipo" vai estar vazio pois ainda não recebeu valor
@@ -63,7 +63,7 @@ public class ContaBanco {
             this.setSaldo(50);
             imp("CC aberta: Saldo 50");
         }
-        else if(oTipo == "cc"){ 
+        else if(oTipo == "cp"){ //POUPANÇA
             this.setNumConta(oConta);
             this.setTipo(oTipo);
             this.setDono(oDono);
@@ -79,9 +79,9 @@ public class ContaBanco {
         if(this.getSaldo() == 0){
             //this.status = false; //se for ZERO fecha. Se não, tem que zerar antes.
             this.setStatus(false);
-            imp("Conta fechada.");
+            imp(">>>Conta fechada.");
         }else{
-            imp("ERRO: O saldo precisa estar zerado para FECHAR");
+            imp(">>>ERRO: O saldo precisa estar zerado para FECHAR");
         }
     }
     
@@ -90,8 +90,8 @@ public class ContaBanco {
         if(this.getStatus() == true){
             //this.saldo = this.saldo + valor;
             this.setSaldo(this.getSaldo() + valor);
-            imp("Valor depositado: "+ valor + 
-                    "| Novo Saldo: " + this.getSaldo() );
+            imp(">>>Valor depositado: "+ valor + 
+                    "\n| Novo Saldo: " + this.getSaldo() );
         }
         else{
             imp("A conta NÃO está aberta. Não depositado");
@@ -99,12 +99,14 @@ public class ContaBanco {
     }
     
     public void sacar(int saque){
+        //poderia ser [if(this.getStatus())] sem o TRUE pois é boolean
         if(this.getStatus() == true){ //verifica se conta tá aberta
-            if((this.getSaldo() - saque) >= 0){ //verifica se o saque é até o valor do saldo
+            //if((this.getSaldo() - saque) >= 0){ //verifica se o saque é até o valor do saldo (valor solicitado
+            if((this.getSaldo() >= saque)){ 
                 //this.saldo = this.saldo - saque;
                 this.setSaldo(this.getSaldo() - saque);
-                imp("Valor sacado: " + saque + 
-                        "| Novo saldo: " + this.getSaldo());
+                imp(">>>Valor sacado: " + saque + 
+                        "\n| Novo saldo: " + this.getSaldo());
             }
             else{
                 imp("Saldo insuficiente. Disponível: " + this.getSaldo());
@@ -116,38 +118,34 @@ public class ContaBanco {
     }
     
     public void pagarMensal(){
+        int valorCC = 10;
+        int valorCP = 20;
         if(this.getTipo() == "cc"){
             //this.saldo = this.saldo - 10
-            this.setSaldo(this.getSaldo() - 10);
-            imp("CONTA *CC* R$ 10 paga | Novo saldo: "+this.getSaldo() );
+            this.setSaldo(this.getSaldo() - valorCC);
+            imp(">>>CONTA *CC* R$ 10 paga \n| Novo saldo: "+this.getSaldo() );
         }
         // else if("cp".equals(this.getTipo())){ EXEMPLO USANDO EQUALS
         else if(this.getTipo() == "cp"){
             //this.saldo = this.saldo - 20;
-            this.setSaldo(getSaldo() - 20);
-            imp("POUPANÇA *CP* R$ 20 paga | Novo saldo: "+this.getSaldo());
+            this.setSaldo(getSaldo() - valorCP);
+            imp(">>>POUPANÇA *CP* R$ 20 paga \n| Novo saldo: "+this.getSaldo());
         }
         else{
-            imp("Erro no pagamento");
+            imp(">>>Erro no pagamento");
         }
     }
     
     public void ver(){
-        /*
-        public int numConta;
-        protected String tipo;
-        private String dono;
-        private int saldo;
-        private boolean status; 
-         */
-        imp("___________");
-        imp("Conta : "  + this.getNumConta());
-        imp("Tipo : "  + this.getTipo());
-        imp("Dono : "  + this.getDono());
-        imp("Saldo : "  + this.getSaldo());
-        imp("Status : "  + this.getStatus());
-    
+        //numConta; tipo; dono; saldo; status; 
+        imp("___________ STATUS" 
+            + "\nConta : "  + this.getNumConta()
+            + "\nTipo : "  + this.getTipo()
+            + "\nDono : "  + this.getDono()
+            + "\nSaldo : "  + this.getSaldo()
+            + "\nStatus : "  + this.getStatus());
     }
+    
     
 
     //getters e setters
