@@ -104,6 +104,7 @@ public class ContaBanco {
             this.setSaldo(this.getSaldo() - 10);
             System.out.println("CONTA *CC* R$ 10 paga | Novo saldo: "+this.getSaldo() );
         }
+        // else if("cp".equals(this.getTipo())){ EXEMPLO USANDO EQUALS
         else if(this.getTipo() == "cp"){
             //this.saldo = this.saldo - 20;
             this.setSaldo(getSaldo() - 20);
@@ -131,8 +132,7 @@ public class ContaBanco {
     
     }
     
-    
-    
+
     //getters e setters
     
     /*
