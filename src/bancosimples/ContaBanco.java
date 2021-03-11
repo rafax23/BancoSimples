@@ -20,14 +20,30 @@ public class ContaBanco {
     
     //construtor
     public ContaBanco(){
-        this.status = false;
-        this.saldo = 0; //passado via atributo em vez de Setter
+        //this.status = false;
+        this.setStatus(false);
+        //this.saldo = 0; //passado via atributo em vez de Setter
+        this.setSaldo(0);
     }
     
     /*
     * VOID é sem retorno
     Se tiver retorno escreve o tipo (String, Int...)
     EXEMPLO: GET COM VALOR
+    */
+    
+    //teste metodo para não usar System.out.println
+    public void imp(String texto){
+        //esse é o único System.out.println
+        System.out.println(texto);
+    }
+    
+    /*
+    public void testeImp(){
+        imp("\n== UM NOVO TESTE ==");
+        imp("\n 0 | " + this.saldo);
+        imp("\n 0 | " + this.getSaldo());
+    }
     */
     
     //metodos
@@ -42,42 +58,43 @@ public class ContaBanco {
         //se comparar o "this.tipo" vai estar vazio pois ainda não recebeu valor
             this.setNumConta(oConta);
             this.setTipo(oTipo);
-            this.setSaldo(50);
             this.setDono(oDono);
             //this.saldo = 50;
-            System.out.println("CC aberta: Saldo 50");
+            this.setSaldo(50);
+            imp("CC aberta: Saldo 50");
         }
         else if(oTipo == "cc"){ 
             this.setNumConta(oConta);
             this.setTipo(oTipo);
-            this.setSaldo(50);
+            this.setDono(oDono);
             //this.saldo = 150;
             this.setSaldo(150);
-            System.out.println("CP Aberta: Saldo 150");
+            imp("CP Aberta: Saldo 150");
         }else{// if(this.tipo != "cp" || this.tipo != "cc"){
-            System.out.println("Tipo inválido. CC ou CP");
+            imp("Tipo inválido. CC ou CP");
         }
     }
     
     public void fecharConta(){
         if(this.getSaldo() == 0){
-            //this.status = false;
+            //this.status = false; //se for ZERO fecha. Se não, tem que zerar antes.
             this.setStatus(false);
-            System.out.println("Conta fechada.");
+            imp("Conta fechada.");
         }else{
-            System.out.println("ERRO: O saldo precisa estar zerado para FECHAR");
+            imp("ERRO: O saldo precisa estar zerado para FECHAR");
         }
     }
+    
     
     public void depositar(int valor){
         if(this.getStatus() == true){
             //this.saldo = this.saldo + valor;
             this.setSaldo(this.getSaldo() + valor);
-            System.out.println("Valor depositado: "+ valor + 
+            imp("Valor depositado: "+ valor + 
                     "| Novo Saldo: " + this.getSaldo() );
         }
         else{
-            System.out.println("A conta NÃO está aberta. Não depositado");
+            imp("A conta NÃO está aberta. Não depositado");
         }
     }
     
@@ -86,15 +103,15 @@ public class ContaBanco {
             if((this.getSaldo() - saque) >= 0){ //verifica se o saque é até o valor do saldo
                 //this.saldo = this.saldo - saque;
                 this.setSaldo(this.getSaldo() - saque);
-                System.out.println("Valor sacado: " + saque + 
+                imp("Valor sacado: " + saque + 
                         "| Novo saldo: " + this.getSaldo());
             }
             else{
-                System.out.println("Saldo insuficiente. Disponível: " + this.getSaldo());
+                imp("Saldo insuficiente. Disponível: " + this.getSaldo());
             }
         }
         else{
-            System.out.println("Conta fechada não é possível sacar");
+            imp("Conta fechada não é possível sacar");
         }
     }
     
@@ -102,16 +119,16 @@ public class ContaBanco {
         if(this.getTipo() == "cc"){
             //this.saldo = this.saldo - 10
             this.setSaldo(this.getSaldo() - 10);
-            System.out.println("CONTA *CC* R$ 10 paga | Novo saldo: "+this.getSaldo() );
+            imp("CONTA *CC* R$ 10 paga | Novo saldo: "+this.getSaldo() );
         }
         // else if("cp".equals(this.getTipo())){ EXEMPLO USANDO EQUALS
         else if(this.getTipo() == "cp"){
             //this.saldo = this.saldo - 20;
             this.setSaldo(getSaldo() - 20);
-            System.out.println("POUPANÇA *CP* R$ 20 paga | Novo saldo: "+this.getSaldo());
+            imp("POUPANÇA *CP* R$ 20 paga | Novo saldo: "+this.getSaldo());
         }
         else{
-            System.out.println("Erro no pagamento");
+            imp("Erro no pagamento");
         }
     }
     
@@ -123,12 +140,12 @@ public class ContaBanco {
         private int saldo;
         private boolean status; 
          */
-        System.out.println("___________");
-        System.out.println("Conta : "  + this.getNumConta());
-        System.out.println("Tipo : "  + this.getTipo());
-        System.out.println("Dono : "  + this.getDono());
-        System.out.println("Saldo : "  + this.getSaldo());
-        System.out.println("Status : "  + this.getStatus());
+        imp("___________");
+        imp("Conta : "  + this.getNumConta());
+        imp("Tipo : "  + this.getTipo());
+        imp("Dono : "  + this.getDono());
+        imp("Saldo : "  + this.getSaldo());
+        imp("Status : "  + this.getStatus());
     
     }
     
@@ -172,7 +189,7 @@ public class ContaBanco {
         this.saldo = saldo;
     }
 
-    public boolean getStatus() { //poderia ser isStatus mas mantive pardrão get
+    public boolean getStatus() { //poderia ser [IS] isStatus mas mantive pardrão get
         return status;
     }
 

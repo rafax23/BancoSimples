@@ -14,10 +14,8 @@ public class BancoSimples {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) {     
         ContaBanco c1 = new ContaBanco();
-        //c1.ver();
-        
         //int oConta, String oTipo, String oDono
         c1.abrirConta(1,"cc","rafael");
         c1.ver();
@@ -29,6 +27,8 @@ public class BancoSimples {
         c1.ver();
         c1.pagarMensal();
         c1.ver();
+        
+        //c1.testeImp();
         
     }
     
