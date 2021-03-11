@@ -21,7 +21,8 @@ public class BancoSimples {
         //int oConta, String oTipo, String oDono
         c1.abrirConta(1,"cc","rafael");
         c1.ver();
-        c1.status = true; //criar Get/Set
+        //c1.status = true; //[[ATENÇÃO]] criar Get/Set
+        c1.setStatus(true);
         c1.depositar(500);
         c1.ver();
         c1.sacar(100);
